@@ -1,5 +1,4 @@
 import os
-from itertools import cycle
 
 # Change to the first day directory
 os.chdir('Day 01')
@@ -21,6 +20,8 @@ data = list(map(int, data))
 print(f'The answer to part 1 is: {sum(data)}')
 
 ### Part 2
+from itertools import cycle
+
 freqs = {0} # This is a set. A list ("[0]") took 200x longer
 currentFreq = 0
 
@@ -32,3 +33,12 @@ for i, val in enumerate(cycle(data)):
         break
 
     freqs.add(currentFreq)
+
+# A more pythonic solution (taken from Reddit: https://www.reddit.com/r/adventofcode/comments/a20646/2018_day_1_solutions/eauapmb/):
+from itertools import accumulate
+
+freqs = {0}
+
+# accumulate takes cumulative sums
+# next pulls the next value from an iterator
+print(next(f for f in accumulate(cycle(data)) if f in freqs or freqs.add(f)))
