@@ -44,7 +44,7 @@ for c1, c2 in combinations(claims, 2):
     o = c1.overlap(c2)
 
     if o is not None:
-        print(f'{c1.id} :: {c2.id}: {o}')
+        # print(f'{c1.id} :: {c2.id}: {o}')
         overlaps.append(o)
 
 def expandOverlapToCoords(overlap):
@@ -52,5 +52,8 @@ def expandOverlapToCoords(overlap):
     y = list(overlap['y'])
     return list(product(x, y))
 
-print(len(set(chain.from_iterable(map(expandOverlapToCoords, overlaps)))))
-#print(set(chain.from_iterable(map(expandOverlapToCoords, overlaps))))
+print(f'The answer to Part 1 is: {len(set(chain.from_iterable(map(expandOverlapToCoords, overlaps))))}')
+
+### Part Two
+all_overlap_ids = set(chain.from_iterable([[c1.id, c2.id] for c1, c2 in combinations(claims, 2) if c1.overlap(c2)]))
+print(f'The answer to Part 2 is: {[c.id for c in claims if c.id not in all_overlap_ids]}')
