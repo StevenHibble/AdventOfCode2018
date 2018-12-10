@@ -43,9 +43,9 @@ from itertools import combinations, product, chain
 # fabric = [[0] * 1000 for i in range(1000)]
 
 
-tests = [elfClaim('#1 @ 1,3: 4x4'), elfClaim('#2 @ 3,1: 4x4'), elfClaim('#3 @ 5,5: 2x2')]
+#tests = [elfClaim('#1 @ 1,3: 4x4'), elfClaim('#2 @ 3,1: 4x4'), elfClaim('#3 @ 5,5: 2x2')]
 overlaps = []
-for c1, c2 in combinations(tests, 2):
+for c1, c2 in combinations(claims, 2):
     o = c1.overlap(c2)
     if o is not None:
         overlaps.append(o)
@@ -55,4 +55,4 @@ def expandOverlapToCoords(overlap):
     y = list(overlap['y'])
     return list(product(x, y))
 
-print(len(set(chain.from_iterable(map(expandOverlapToCoords, overlaps)))))
+print(set(chain.from_iterable(map(expandOverlapToCoords, overlaps))))
